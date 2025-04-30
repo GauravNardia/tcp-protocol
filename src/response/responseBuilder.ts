@@ -3,6 +3,7 @@ export function buildResponse(status: number, body: any, contentType = 'text/pla
 
     const responseLine = [
         `HTTP/1.1 ${status} ${getStatusMessage(status)}`,
+        `Date: ${new Date().toUTCString()}`,
         `Content-type: ${contentType}`,
         `Content-length: ${Buffer.byteLength(bodyString)}`,
         '',

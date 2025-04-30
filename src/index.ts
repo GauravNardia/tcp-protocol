@@ -4,23 +4,24 @@ import { parseHttpRequest } from './request/requestParser';
 import { handleRequest } from './routes/routes';
 
 const server = net.createServer((socket) => {
-    socket.on("data", (data) => {
-        const request = data.toString();
+    let buffer = '';
 
-        if(!request){
-            const badResponse = buildResponse(400, 'Invalid Request');
-            socket.write(badResponse);
-            socket.end();
-            return;
-        };
+    socket.on("data", (chunk) => {
+        buffer += chunk.toString();
+
+        if(buffer.indexOf('\r\n\r\n') === -1) return; 
 
            try {
 
-                const {method, path, headers, body} = parseHttpRequest(request);
-                const {status, body:resBody, contentType} =  handleRequest(method, path, body);
+                const {method, path, headers, body, query} = parseHttpRequest(buffer);
+                const {status, body:resBody, contentType} =  handleRequest(method, path, body, query);
                 const response = buildResponse(status, resBody, contentType);
 
                 socket.write(response);
+
+                if(headers['connection'] !== 'keep-alive') {
+                    socket.end();
+                }
 
            } catch (error) {
             const response = buildResponse(400, 'Invalid JSON');
@@ -28,7 +29,6 @@ const server = net.createServer((socket) => {
            }
     
 
-        socket.end();
     });
 
 

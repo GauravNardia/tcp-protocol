@@ -4,14 +4,14 @@ TODO: Build a Robust Custom HTTP Server
 1.  ✅ Set up basic HTTP method handling (GET, POST, PUT, DELETE)
 2.  ✅ Parse and use query parameters in routes
 3.  ✅ Validate query parameters (e.g., check if 'name' is string)
-4.  ⬜ Add support for common headers like Authorization, Content-Type
-5.  ⬜ Implement response logging (method, path, status, body)
-6.  ⬜ Support parsing for application/x-www-form-urlencoded
-7.  ⬜ Add CORS headers for cross-origin requests
-8.  ⬜ Implement static file serving (e.g., /static/file.png)
-9.  ⬜ Make request handler asynchronous with async/await
-10. ⬜ Implement graceful shutdown with SIGINT or SIGTERM handling
-11. ⬜ Add unit tests for each route using a test framework
+4.  ✅ Add support for common headers like Authorization, Content-Type
+5.  ✅ Implement response logging (method, path, status, body)
+6.  ✅ Support parsing for application/x-www-form-urlencoded
+7.  ✅ Add CORS headers for cross-origin requests
+8.  ✅ Implement static file serving (e.g., /static/file.png)
+9.  ✅ Make request handler asynchronous with async/await
+10. ✅ Implement graceful shutdown with SIGINT or SIGTERM handling
+11. ✅ Add unit tests for each route using a test framework
 12. ⬜ Deploy server and set up monitoring
 
 Next Step: Start with step 3 – validate query parameters properly.

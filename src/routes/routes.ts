@@ -1,4 +1,7 @@
-export function handleRequest(method: string, path: string, body: any, query:any) {
+import fs from "fs"
+import pathModule from 'path'
+
+export async function handleRequest(method: string, path: string, body: any, query:any, headers:any) {
 
     if(method === 'GET' && path === '/'){
         return {
@@ -8,10 +11,23 @@ export function handleRequest(method: string, path: string, body: any, query:any
         }
     }
 
+  //   if (method === 'GET' && path === '/static') {
+  //     const filePath = pathModule.join(__dirname, '../public', path.replace('/static/', ''));
+  //     if (fs.existsSync(filePath)) {
+  //         const content = fs.readFileSync(filePath);
+  //         return {
+  //             status: 200,
+  //             body: content,
+  //             contentType: getMimeType(filePath),
+  //         };
+  //     }
+  //     return { status: 404, body: 'File not found', contentType: 'text/plain' };
+  // }
+
     if (method === 'POST' && path === '/echo') {
         return {
           status: 200,
-          body: {message: 'Welcome!', query} ,
+          body: {message: 'Welcome!', query, headers} ,
           contentType: 'application/json'
         };
       }
@@ -39,3 +55,13 @@ export function handleRequest(method: string, path: string, body: any, query:any
       }
 
 }
+
+
+
+// function getMimeType(filePath: string): string {
+//   if(filePath.endsWith('.txt')) return 'text/plain';
+//   if (filePath.endsWith('.png')) return 'image/png';
+//   if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) return 'image/jpeg';
+//   if (filePath.endsWith('.html')) return 'text/html';
+//   return 'application/octet-stream';
+// }

@@ -28,5 +28,11 @@ export function parseHttpRequest(request: string) {
       }
   }
 
+  if(headers['content-type'] === 'application/x-www-form-urlencoded'){
+    body = Object.fromEntries(new URLSearchParams(rawBody))
+  }
+  
+  console.log(`Request Method: ${method}, Path: ${path}, Query: ${JSON.stringify(query)}`);
+
   return { method, path, headers, body, query };
 }

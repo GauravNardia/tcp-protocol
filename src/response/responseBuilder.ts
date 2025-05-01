@@ -6,9 +6,13 @@ export function buildResponse(status: number, body: any, contentType = 'text/pla
         `Date: ${new Date().toUTCString()}`,
         `Content-type: ${contentType}`,
         `Content-length: ${Buffer.byteLength(bodyString)}`,
+        `Access-Control-Allow-Origin: *`,
+        `Access-Control-Allow-Headers: Content-Type, Authorization`,
         '',
         bodyString
     ];
+
+    console.log(`Response Status: ${status}, Body: ${JSON.stringify(body)}`);
 
     return responseLine.join('\r\n')
 
